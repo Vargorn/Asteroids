@@ -163,7 +163,7 @@ void Game::updatePlayer()
 		this->player->move(0.f, 1.f);
 	}
 	if (this->player->getHp() > 0) {
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->player->canAttack()) {
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->player->canAttack()) {
 			this->projectiles.push_back(new Projectile(this->textures["PROJECTILE"], this->player->getPosition().x + this->player->getBounds().width / 2, this->player->getPosition().y, 0.f, -1.f, 5.f));
 			shot_sn.play();
 		}
@@ -245,12 +245,11 @@ void Game::update()
 	this->updateProjectiles();
 	this->updateEnemies();
 }
+
 void Game::renderText()
 {
 	this->window->draw(this->text);
 }
-
-
 void Game::render()
 {
 	this->window->clear();
